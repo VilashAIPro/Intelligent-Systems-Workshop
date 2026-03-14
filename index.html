@@ -271,8 +271,12 @@
                         <div class="time-box"><span class="seconds">00</span><small>Seconds</small></div>
                     </div>
                     
-                    <div class="live-counter glass mb-4" style="padding: 10px 20px; border-radius: 30px; display: inline-block;">
-                        <h3 style="color: var(--text-main); font-size: 1.2rem; font-family: 'Inter', sans-serif;">👥 Registered Students: <span class="highlight">32 / 60 Seats Filled</span></h3>
+                    <div class="live-counter glass mb-4" style="padding: 20px; border-radius: 20px; width: 100%; max-width: 500px; margin: 0 auto 20px;">
+                        <h3 style="color: var(--text-main); font-size: 1.2rem; margin-bottom: 10px;">👥 Registered Students: <span id="students-counter" class="highlight">Loading...</span></h3>
+                        <div class="progress-container">
+                            <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                        </div>
+                        <p id="seats-left" class="text-dim mt-2" style="font-size: 0.95rem;">Calculating seats...</p>
                     </div>
 
                     <a href="https://forms.gle/4jvMaA7rhZ7QkJjb8" target="_blank" class="btn-primary mega-btn" style="display: block; width: fit-content; margin: 0 auto;">🟡 REGISTER NOW</a>

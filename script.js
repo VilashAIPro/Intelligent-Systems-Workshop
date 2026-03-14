@@ -159,4 +159,44 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // 4. Live Student Registration Counter
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk4gWuvlG4Up9MQ34RJfw_DIc-dQ_yG0SPD5otkhtuy6aN5JKfCFZO3lC9H2rGWf9Nd4azgo_tUB5d/pub?output=csv";
+    const maxSeats = 60;
+    
+    fetch(csvUrl, { cache: "no-store" }) // Avoid caching so it's fresh
+        .then(res => res.text())
+        .then(data => {
+            // Count rows, minus 1 for header row (if there's no header, just use data.trim().split("\n").length)
+            let rowsCount = data.trim().split("\n").length - 1; 
+            // Ensure we don't show negative or exceed max seats weirdly.
+            if (rowsCount < 0) rowsCount = 0;
+            
+            const studentsCounterText = document.getElementById("students-counter");
+            const progressBar = document.getElementById("progress-bar");
+            const seatsLeft = document.getElementById("seats-left");
+
+            if(studentsCounterText && progressBar && seatsLeft) {
+                // Determine percentage
+                const percentage = Math.min((rowsCount / maxSeats) * 100, 100);
+                const remaining = maxSeats - rowsCount;
+
+                // Animate to data
+                studentsCounterText.innerHTML = `${rowsCount} / ${maxSeats} Seats Filled`;
+                progressBar.style.width = percentage + "%";
+                
+                if(remaining <= 0) {
+                    seatsLeft.innerHTML = "<span class='highlight' style='color: var(--primary-red)'>🚨 All seats are fully booked!</span>";
+                } else if(remaining <= 10) {
+                    seatsLeft.innerHTML = `🔥 Hurry up! Only <span class="highlight">${remaining} seats left!</span>`;
+                } else {
+                    seatsLeft.innerHTML = `Available Seats: ${remaining}`;
+                }
+            }
+        })
+        .catch(err => {
+            console.error("Could not load registration data: ", err);
+            const studentsCounterText = document.getElementById("students-counter");
+            if(studentsCounterText) studentsCounterText.innerHTML = "Live data unavailable";
+        });
 });
