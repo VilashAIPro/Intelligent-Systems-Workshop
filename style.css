@@ -333,6 +333,35 @@ section {
 .center-card { max-width: 400px; margin: 0 auto; }
 .avatar { font-size: 4rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255, 234, 0, 0.4); }
 
+.speaker-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-content: center;
+}
+.speaker-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    background: rgba(10, 10, 10, 0.8);
+    border: 3px solid var(--highlight-yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.speaker-card:hover .speaker-avatar {
+    box-shadow: 0 0 25px var(--primary-red);
+    border-color: var(--primary-red);
+    transform: scale(1.05); /* slightly scale photo pop */
+}
+.speaker-card .topic {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+.mt-5 { margin-top: 3rem; }
+
 /* Countdown Section */
 .glow-border {
     border: 2px solid var(--primary-red);
